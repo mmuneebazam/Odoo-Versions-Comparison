@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odoo 15 vs 16 vs 17 vs 18 vs 19 vs 20 — Visual Comparison & Benchmarks</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#f5f6fa;color:#2d3436;line-height:1.55}
+.hero{background:linear-gradient(135deg,#714B67 0%,#8E5B84 55%,#a06a9b 100%);color:#fff;padding:56px 24px 44px;text-align:center}
+.hero h1{font-size:2.4rem;font-weight:800;letter-spacing:-.5px}
+.hero p{max-width:820px;margin:14px auto 0;font-size:1.08rem;opacity:.92}
+.hero .meta{margin-top:18px;font-size:.85rem;opacity:.75}
+.chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 18px;font-size:.88rem;font-weight:600;backdrop-filter:blur(4px)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 60px}
+section{background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(45,52,54,.07);padding:34px 30px;margin-top:34px}
+section h2{font-size:1.45rem;font-weight:800;color:#714B67;margin-bottom:6px}
+section .sub{color:#636e72;font-size:.95rem;margin-bottom:22px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
+.vcard{border:1px solid #e6e6ef;border-radius:14px;padding:20px 20px 16px;background:#fdfdff;display:flex;flex-direction:column;gap:10px}
+.vnum{font-size:1.5rem;font-weight:800}
+.vname{font-size:1.02rem;font-weight:700;color:#2d3436}
+.vdate{font-size:.82rem;color:#636e72}
+.badge{align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.4px;padding:5px 12px;border-radius:999px;text-transform:uppercase}
+.badge.ok{background:#e6fff5;color:#009379}.badge.warn{background:#fff3e0;color:#d97a16}
+.badge.bad{background:#ffe9e9;color:#c0392b}.badge.new{background:#f0e9f5;color:#714B67}
+.feats{list-style:none;display:flex;flex-direction:column;gap:7px;font-size:.88rem;color:#444}
+.feats li{display:flex;gap:9px;align-items:flex-start}
+.tick{flex:0 0 8px;width:8px;height:8px;border-radius:50%;margin-top:6px}
+.vnote{margin-top:auto;font-size:.83rem;color:#636e72;border-top:1px dashed #e0e0ea;padding-top:10px;font-style:italic}
+.tablewrap{overflow-x:auto}
+table.matrix{border-collapse:collapse;width:100%;font-size:.86rem;min-width:880px}
+table.matrix th,table.matrix td{padding:10px 12px;text-align:center;border-bottom:1px solid #eeeef4}
+table.matrix td.rowlabel,table.matrix th.rowlabel{text-align:left;font-weight:700;color:#2d3436;background:#fafafd;position:sticky;left:0}
+table.matrix tbody tr:hover{background:#faf7fc}
+.mchip{display:inline-block;color:#fff;font-weight:800;font-size:.85rem;padding:5px 12px;border-radius:9px}
+td.ok{color:#009379;font-weight:600}td.mid{color:#d97a16;font-weight:600}td.no{color:#b2bec3;font-weight:600}
+.footnote{font-size:.78rem;color:#9aa0a6;margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:24px}
+.stat{background:linear-gradient(160deg,#f6f0f8,#fff);border:1px solid #ece2f0;border-radius:14px;padding:16px 14px;text-align:center}
+.stat .big{font-size:1.7rem;font-weight:800;color:#714B67}
+.stat .lbl{font-size:.78rem;color:#636e72;margin-top:4px}
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.rcard{border:1px solid #e6e6ef;border-radius:14px;padding:18px;background:#fdfdff}
+.rpick{display:inline-block;color:#fff;font-weight:800;font-size:.85rem;padding:6px 14px;border-radius:999px;margin-bottom:9px}
+.rtitle{font-weight:700;font-size:.98rem;margin-bottom:5px}
+.rwhy{font-size:.87rem;color:#555}
+.verdict{background:linear-gradient(135deg,#714B67,#8E5B84);color:#fff;border-radius:18px;padding:34px 30px;margin-top:34px}
+.verdict h2{color:#fff;font-size:1.45rem;font-weight:800;margin-bottom:12px}
+.verdict ul{margin:10px 0 0 20px;font-size:.95rem}
+.verdict li{margin-bottom:8px}
+footer{max-width:1120px;margin:34px auto 0;padding:0 20px 40px;font-size:.8rem;color:#9aa0a6}
+footer a{color:#8E5B84;text-decoration:none}
+.toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+.toc a{color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:999px;font-size:.82rem;text-decoration:none;font-weight:600}
+.toc a:hover{background:rgba(255,255,255,.28)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Odoo 15 → 20: The Complete Visual Comparison</h1>
+  <p>Six major versions explored in detail — release timeline, feature matrix, performance benchmarks, support lifecycle, and a clear recommendation on <b>which version to use for which purpose</b>.</p>
+  <div class="chips">
+    <span class="chip">Latest release: <b>Odoo 20</b> · 24 Sep 2026</span>
+    <span class="chip">Currently supported: <b>18 · 19 · 20</b></span>
+    <span class="chip">Odoo 17 support ends <b>this month</b> (Sep 2026)</span>
+    <span class="chip">~1 major release / year · 3-year support window</span>
+  </div>
+  <nav class="toc">
+    <a href="#timeline">Timeline</a><a href="#versions">Version deep-dive</a><a href="#matrix">Feature matrix</a>
+    <a href="#bench">Benchmarks</a><a href="#radar">Scorecard</a><a href="#choose">Which to use</a><a href="#upgrade">Upgrade path</a>
+  </nav>
+  <div class="meta">Prepared 8 October 2026 · Sources: odoo.com release notes &amp; documentation, Odoo Experience 2026 announcements, partner benchmark reports (see footer)</div>
+</header>
+
+<div class="wrap">
+
+<section id="timeline">
+  <h2>1 · Release &amp; Support Timeline</h2>
+  <p class="sub">Odoo ships one major version per year (announced at Odoo Experience, Brussels) and provides standard support for the three most recent majors (~3 years). Bars show each version's standard-support window.</p>
+  <svg viewBox="0 0 1060 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Odoo release and support timeline"><line x1="190.0" y1="32" x2="190.0" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="190.0" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2021</text><line x1="282.2" y1="32" x2="282.2" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="282.2" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2022</text><line x1="374.4" y1="32" x2="374.4" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="374.4" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2023</text><line x1="466.7" y1="32" x2="466.7" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="466.7" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2024</text><line x1="558.9" y1="32" x2="558.9" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="558.9" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2025</text><line x1="651.1" y1="32" x2="651.1" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="651.1" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2026</text><line x1="743.3" y1="32" x2="743.3" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="743.3" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2027</text><line x1="835.6" y1="32" x2="835.6" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="835.6" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2028</text><line x1="927.8" y1="32" x2="927.8" y2="310" stroke="#dfe6e9" stroke-width="1"/><text x="927.8" y="26" font-size="12" fill="#636e72" text-anchor="middle" font-family="inherit">2029</text><line x1="190.0" y1="32" x2="190.0" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="236.1" y1="32" x2="236.1" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="282.2" y1="32" x2="282.2" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="328.3" y1="32" x2="328.3" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="374.4" y1="32" x2="374.4" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="420.6" y1="32" x2="420.6" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="466.7" y1="32" x2="466.7" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="512.8" y1="32" x2="512.8" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="558.9" y1="32" x2="558.9" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="605.0" y1="32" x2="605.0" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="651.1" y1="32" x2="651.1" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="697.2" y1="32" x2="697.2" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="743.3" y1="32" x2="743.3" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="789.4" y1="32" x2="789.4" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="835.6" y1="32" x2="835.6" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="881.7" y1="32" x2="881.7" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="927.8" y1="32" x2="927.8" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="973.9" y1="32" x2="973.9" y2="37" stroke="#b2bec3" stroke-width="1"/><line x1="1020.0" y1="32" x2="1020.0" y2="37" stroke="#b2bec3" stroke-width="1"/><text x="178" y="66.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 15</text><rect x="259.2" y="48" width="276.7" height="26" rx="13" fill="#b2bec3" opacity="0.92"/><text x="397.5" y="66.0" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="middle" font-family="inherit">Oct 2021  →  EOL Oct 2024</text><circle cx="535.8" cy="61" r="4" fill="#b2bec3" stroke="#fff" stroke-width="1.5"/><text x="178" y="110.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 16</text><rect x="351.4" y="92" width="176.8" height="26" rx="13" fill="#b2bec3" opacity="0.92"/><text x="439.8" y="110.0" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="middle" font-family="inherit">Oct 2022  →  EOL Sep 2025 (paid ext. on .sh/on-prem)</text><circle cx="528.1" cy="105" r="4" fill="#b2bec3" stroke="#fff" stroke-width="1.5"/><text x="178" y="154.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 17</text><rect x="451.3" y="136" width="261.3" height="26" rx="13" fill="#fdcb6e" opacity="0.92"/><text x="581.9" y="154.0" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="middle" font-family="inherit">Nov 2023  →  support ends Sep 2026 — THIS MONTH</text><circle cx="712.6" cy="149" r="4" fill="#fdcb6e" stroke="#fff" stroke-width="1.5"/><text x="178" y="198.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 18</text><rect x="535.8" y="180" width="269.0" height="26" rx="13" fill="#55efc4" opacity="0.92"/><text x="670.3" y="198.0" font-size="11.5" font-weight="600" fill="#fff" text-anchor="middle" font-family="inherit">Oct 2024  →  supported until Sep 2027</text><circle cx="804.8" cy="193" r="4" fill="#55efc4" stroke="#fff" stroke-width="1.5"/><text x="178" y="242.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 19</text><rect x="620.4" y="224" width="276.7" height="26" rx="13" fill="#00b894" opacity="0.92"/><text x="758.7" y="242.0" font-size="11.5" font-weight="600" fill="#fff" text-anchor="middle" font-family="inherit">Sep 2025  →  supported until Sep 2028</text><circle cx="897.0" cy="237" r="4" fill="#00b894" stroke="#fff" stroke-width="1.5"/><text x="178" y="286.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 20</text><rect x="712.6" y="268" width="276.7" height="26" rx="13" fill="#714B67" opacity="0.92"/><text x="850.9" y="286.0" font-size="11.5" font-weight="600" fill="#fff" text-anchor="middle" font-family="inherit">Sep 2026  →  projected support to ~Sep 2029</text><circle cx="989.3" cy="281" r="4" fill="#714B67" stroke="#fff" stroke-width="1.5"/><line x1="722.0" y1="32" x2="722.0" y2="310" stroke="#d63031" stroke-width="2" stroke-dasharray="6 4"/><rect x="676.0" y="318" width="92" height="20" rx="10" fill="#d63031"/><text x="722.0" y="332" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle" font-family="inherit">TODAY · 8 Oct 2026</text><rect x="190" y="342" width="14" height="14" rx="7" fill="#55efc4"/><text x="210" y="354" font-size="12" fill="#636e72" font-family="inherit">Standard support</text><rect x="360" y="342" width="14" height="14" rx="7" fill="#fdcb6e"/><text x="380" y="354" font-size="12" fill="#636e72" font-family="inherit">Ending now</text><rect x="500" y="342" width="14" height="14" rx="7" fill="#b2bec3"/><text x="520" y="354" font-size="12" fill="#636e72" font-family="inherit">End of life</text><rect x="630" y="342" width="14" height="14" rx="7" fill="#714B67"/><text x="650" y="354" font-size="12" fill="#636e72" font-family="inherit">Newest release</text></svg>
+</section>
+
+<section id="versions">
+  <h2>2 · Version Deep-Dive</h2>
+  <p class="sub">What each version is known for, its headline features, and its status as of 8 October 2026.</p>
+  <div class="vgrid">
+        <div class="vcard" style="border-top:6px solid #A29BFE">
+          <div class="vhead">
+            <div class="vnum" style="color:#A29BFE">Odoo 15</div>
+            <div class="vname">Maturity & Polish</div>
+            <div class="vdate">October 2021</div>
+          </div>
+          <div class="badge bad">END OF LIFE · Oct 2024</div>
+          <ul class="feats"><li><span class="tick" style="background:#A29BFE"></span>New import tool, new HTML editor, project burn-down chart</li><li><span class="tick" style="background:#A29BFE"></span>Discuss: voice, video calls & screen sharing</li><li><span class="tick" style="background:#A29BFE"></span>POS coupons & promotions; CRM rule-based team assignment</li><li><span class="tick" style="background:#A29BFE"></span>AI-assisted website builder; eCommerce redesign (~35% faster than v14)</li><li><span class="tick" style="background:#A29BFE"></span>US accounting: 1099 e-filing, NACHA bulk payments</li></ul>
+          <div class="vnote">Solid and stable, but no security fixes since Oct 2024. Upgrade.</div>
+        </div>
+        <div class="vcard" style="border-top:6px solid #74B9FF">
+          <div class="vhead">
+            <div class="vnum" style="color:#74B9FF">Odoo 16</div>
+            <div class="vname">The Speed Revolution</div>
+            <div class="vdate">October 2022</div>
+          </div>
+          <div class="badge bad">END OF LIFE · Sep 2025</div>
+          <ul class="feats"><li><span class="tick" style="background:#74B9FF"></span>OWL 2 frontend: backend views load up to 20× faster; −68% CSS</li><li><span class="tick" style="background:#74B9FF"></span>Opening an invoice 3.7× faster; eCommerce pages 3.9× faster</li><li><span class="tick" style="background:#74B9FF"></span>2.4× fewer SQL queries per URL; fragment caching</li><li><span class="tick" style="background:#74B9FF"></span>Computed fields replace onchanges: 50 invoices × 50 lines in 19.4s (was 79.5s)</li><li><span class="tick" style="background:#74B9FF"></span>Revamped accounting reports; new stock / MRP reporting</li></ul>
+          <div class="vnote">Huge leap in speed. Standard support ended Sep 2025 (paid extended support only on Odoo.sh / on-premise).</div>
+        </div>
+        <div class="vcard" style="border-top:6px solid #00CEC9">
+          <div class="vhead">
+            <div class="vnum" style="color:#00CEC9">Odoo 17</div>
+            <div class="vname">The UX Redesign</div>
+            <div class="vdate">November 2023</div>
+          </div>
+          <div class="badge warn">SUPPORT ENDS SEP 2026 — THIS MONTH</div>
+          <ul class="feats"><li><span class="tick" style="background:#00CEC9"></span>Complete UI redesign: new icon set, “New” buttons, native dark mode</li><li><span class="tick" style="background:#00CEC9"></span>Advanced search with multi-rule filters; frozen list/Kanban headers</li><li><span class="tick" style="background:#00CEC9"></span>Ctrl+K command palette; Notes becomes To-do; OWL grid view</li><li><span class="tick" style="background:#00CEC9"></span>Keyboard-first shortcuts; PWA home-screen shortcuts</li><li><span class="tick" style="background:#00CEC9"></span>Redesigned Discuss; faster, more accessible navigation</li></ul>
+          <div class="vnote">The version most SMBs standardized on. Support ends this month — plan your upgrade NOW.</div>
+        </div>
+        <div class="vcard" style="border-top:6px solid #FDCB6E">
+          <div class="vhead">
+            <div class="vnum" style="color:#FDCB6E">Odoo 18</div>
+            <div class="vname">AI & Mobile</div>
+            <div class="vdate">October 2024</div>
+          </div>
+          <div class="badge ok">SUPPORTED · until Sep 2027</div>
+          <ul class="feats"><li><span class="tick" style="background:#FDCB6E"></span>First native AI: email & product-page content generation, auto-translation</li><li><span class="tick" style="background:#FDCB6E"></span>Fully redesigned mobile app; PWA for POS, Shop Floor, Barcode</li><li><span class="tick" style="background:#FDCB6E"></span>Revamped Barcode app with global product-database lookup</li><li><span class="tick" style="background:#FDCB6E"></span>44 industry-specific modules (fitness, real estate, gyms…)</li><li><span class="tick" style="background:#FDCB6E"></span>Readable URLs (/odoo/project/5/tasks) + per-record JSON endpoints</li></ul>
+          <div class="vnote">A safe, well-supported mid-term home — plan the next move within a year.</div>
+        </div>
+        <div class="vcard" style="border-top:6px solid #FF7675">
+          <div class="vhead">
+            <div class="vnum" style="color:#FF7675">Odoo 19</div>
+            <div class="vname">AI-Native ERP</div>
+            <div class="vdate">18 September 2025</div>
+          </div>
+          <div class="badge ok">SUPPORTED · until Sep 2028</div>
+          <ul class="feats"><li><span class="tick" style="background:#FF7675"></span>Native AI agents, prompt-based server automations, AI in editors & chatter</li><li><span class="tick" style="background:#FF7675"></span>≈30% faster page loads than v18 (partner benchmarks); OWL 2</li><li><span class="tick" style="background:#FF7675"></span>Revamped POS (dark mode, dine-in/takeaway presets, combos)</li><li><span class="tick" style="background:#FF7675"></span>Unified UoM & multi-level packaging; smarter replenishment</li><li><span class="tick" style="background:#FF7675"></span>New Time-Off & payroll UX, Gantt zoom, multi-edit calendars; new industry templates</li></ul>
+          <div class="vnote">The current sweet spot: modern, fast, AI-ready, longest-proven of the new generation.</div>
+        </div>
+        <div class="vcard" style="border-top:6px solid #714B67">
+          <div class="vhead">
+            <div class="vnum" style="color:#714B67">Odoo 20</div>
+            <div class="vname">Agentic AI & Offline</div>
+            <div class="vdate">24 September 2026</div>
+          </div>
+          <div class="badge new">NEWEST · projected support to ~Sep 2029</div>
+          <ul class="feats"><li><span class="tick" style="background:#714B67"></span>Autonomous AI agents that create & update records; MCP connector to external AI</li><li><span class="tick" style="background:#714B67"></span>AI website builder from a single sentence; conversational accounting agent</li><li><span class="tick" style="background:#714B67"></span>Full offline mode (view/edit/create, sync later); pay vendor bills from Odoo</li><li><span class="tick" style="background:#714B67"></span>Continuous production + weekly Kanban MRP; CMR documents in Inventory</li><li><span class="tick" style="background:#714B67"></span>OWL 3 (island hydration), native REST & GraphQL, Python 3.12/3.13, PostgreSQL 16+</li></ul>
+          <div class="vnote">Released two weeks ago. Longest runway and boldest features — but the module ecosystem is still catching up.</div>
+        </div></div>
+</section>
+
+<section id="matrix">
+  <h2>3 · Feature &amp; Architecture Comparison Matrix</h2>
+  <p class="sub">Side-by-side across all six versions. ● full · ◐ partial · ○ none.</p>
+  
+    <div class="tablewrap">
+    <table class="matrix">
+      <thead><tr><th class="rowlabel">Criterion</th><th><span class="mchip" style="background:#A29BFE">Odoo 15</span></th><th><span class="mchip" style="background:#74B9FF">Odoo 16</span></th><th><span class="mchip" style="background:#00CEC9">Odoo 17</span></th><th><span class="mchip" style="background:#FDCB6E">Odoo 18</span></th><th><span class="mchip" style="background:#FF7675">Odoo 19</span></th><th><span class="mchip" style="background:#714B67">Odoo 20</span></th></tr></thead>
+      <tbody><tr><td class="rowlabel">Released</td><td>Oct 2021</td><td>Oct 2022</td><td>Nov 2023</td><td>Oct 2024</td><td>Sep 2025</td><td>Sep 2026</td></tr><tr><td class="rowlabel">Standard support until</td><td>Oct 2024</td><td>Sep 2025</td><td>Sep 2026</td><td>Sep 2027</td><td>Sep 2028</td><td>~Sep 2029*</td></tr><tr><td class="rowlabel">Status today (8 Oct 2026)</td><td class="no">✖ EOL</td><td class="no">✖ EOL</td><td class="mid">⚠ Ends now</td><td class="ok">✔ Supported</td><td class="ok">✔ Supported</td><td class="ok">✔ Newest</td></tr><tr><td class="rowlabel">Python (min)</td><td>3.7</td><td>3.8</td><td>3.10</td><td>3.10</td><td>3.12</td><td>3.12 / 3.13</td></tr><tr><td class="rowlabel">PostgreSQL (min)</td><td>12</td><td>12</td><td>12</td><td>12</td><td>13</td><td>16</td></tr><tr><td class="rowlabel">Frontend framework</td><td>OWL 1</td><td class="ok">OWL 2</td><td class="ok">OWL 2</td><td class="ok">OWL 2</td><td class="ok">OWL 2</td><td class="ok">OWL 3 + islands</td></tr><tr><td class="rowlabel">Native AI</td><td class="no">○ None</td><td class="no">○ None</td><td class="no">○ None</td><td class="mid">◐ First AI (text, translation)</td><td class="ok">● AI agents & prompt automations</td><td class="ok">●● Agentic AI + MCP</td></tr><tr><td class="rowlabel">Offline mode</td><td class="no">○</td><td class="no">○</td><td class="no">○</td><td class="mid">◐ POS cache only</td><td class="no">○</td><td class="ok">● Full offline + sync</td></tr><tr><td class="rowlabel">APIs</td><td>XML/JSON-RPC</td><td>XML/JSON-RPC</td><td>XML/JSON-RPC</td><td>JSON endpoints improved</td><td>Enhanced REST</td><td class="ok">REST + GraphQL native</td></tr><tr><td class="rowlabel">Dark mode</td><td class="mid">◐ Community theme</td><td class="mid">◐ Community theme</td><td class="ok">● Native</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td></tr><tr><td class="rowlabel">Ctrl+K command palette</td><td class="no">○</td><td class="no">○</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td></tr><tr><td class="rowlabel">Industry packages</td><td>Few</td><td>Few</td><td>Few</td><td class="ok">44 modules</td><td class="ok">New templates</td><td class="ok">13 new + reworked</td></tr><tr><td class="rowlabel">Mobile PWA apps</td><td class="no">○</td><td class="no">○</td><td class="mid">◐ Shortcuts</td><td class="ok">● POS/Shop/Barcode</td><td class="ok">●</td><td class="ok">●</td></tr><tr><td class="rowlabel">Best for</td><td class="no">Legacy only</td><td class="no">Legacy only</td><td class="mid">Urgent upgrade</td><td class="ok">Stable mid-term</td><td class="ok">Current sweet spot</td><td class="ok">New projects & AI-first</td></tr></tbody>
+    </table>
+    </div>
+    <p class="footnote">* Odoo 20's end-of-support is projected from Odoo's 3-year support policy; Odoo had not yet published the official date at the time of writing. Python/PostgreSQL minimums per Odoo's official installation documentation.</p>
+</section>
+
+<section id="bench">
+  <h2>4 · Performance Benchmarks</h2>
+  <p class="sub">Every generation gets faster — the biggest single leap was Odoo 16's move to the OWL 2 frontend framework.</p>
+  <div class="stats">
+    <div class="stat"><div class="big">3.7×</div><div class="lbl">faster opening an invoice<br>(v16 vs v15, official)</div></div>
+    <div class="stat"><div class="big">3.9×</div><div class="lbl">faster eCommerce page loads<br>(v16 vs v15, official)</div></div>
+    <div class="stat"><div class="big">20×</div><div class="lbl">faster backend views<br>(v16, OWL 2, official)</div></div>
+    <div class="stat"><div class="big">−68%</div><div class="lbl">CSS lines in the web client<br>(v16, official)</div></div>
+    <div class="stat"><div class="big">79.5s → 19.4s</div><div class="lbl">creating 50 invoices × 50 lines<br>(v15 → v16, official)</div></div>
+    <div class="stat"><div class="big">+30%</div><div class="lbl">page-load speed<br>(v19 vs v18, partner benchmarks)</div></div>
+  </div>
+  <svg viewBox="0 0 1060 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Relative performance benchmark by Odoo version"><line x1="130.0" y1="18" x2="130.0" y2="292" stroke="#dfe6e9"/><text x="130.0" y="310" font-size="11" fill="#636e72" text-anchor="middle" font-family="inherit">0</text><line x1="342.5" y1="18" x2="342.5" y2="292" stroke="#dfe6e9"/><text x="342.5" y="310" font-size="11" fill="#636e72" text-anchor="middle" font-family="inherit">100</text><line x1="555.0" y1="18" x2="555.0" y2="292" stroke="#dfe6e9"/><text x="555.0" y="310" font-size="11" fill="#636e72" text-anchor="middle" font-family="inherit">200</text><line x1="767.5" y1="18" x2="767.5" y2="292" stroke="#dfe6e9"/><text x="767.5" y="310" font-size="11" fill="#636e72" text-anchor="middle" font-family="inherit">300</text><line x1="980.0" y1="18" x2="980.0" y2="292" stroke="#dfe6e9"/><text x="980.0" y="310" font-size="11" fill="#636e72" text-anchor="middle" font-family="inherit">400</text><text x="118" y="50.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 15</text><rect x="130" y="30" width="212.5" height="30" rx="8" fill="#A29BFE" opacity="0.92"/><text x="352.5" y="44.0" font-size="14" font-weight="800" fill="#2d3436" font-family="inherit">100</text><text x="394.5" y="44.0" font-size="10.5" fill="#636e72" font-family="inherit">baseline</text><text x="118" y="94.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 16</text><rect x="130" y="74" width="393.1" height="30" rx="8" fill="#74B9FF" opacity="0.92"/><text x="533.1" y="88.0" font-size="14" font-weight="800" fill="#2d3436" font-family="inherit">185</text><text x="575.1" y="88.0" font-size="10.5" fill="#636e72" font-family="inherit">invoice open 3.7× faster · eCommerce 3.9× faster · bulk invoicing 79.5s → 19.4s</text><text x="118" y="138.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 17</text><rect x="130" y="118" width="467.5" height="30" rx="8" fill="#00CEC9" opacity="0.92"/><text x="607.5" y="132.0" font-size="14" font-weight="800" fill="#2d3436" font-family="inherit">220</text><text x="649.5" y="132.0" font-size="10.5" fill="#636e72" font-family="inherit">OWL grid, faster search & rendering</text><text x="118" y="182.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 18</text><rect x="130" y="162" width="531.2" height="30" rx="8" fill="#FDCB6E" opacity="0.92"/><text x="671.2" y="176.0" font-size="14" font-weight="800" fill="#2d3436" font-family="inherit">250</text><text x="713.2" y="176.0" font-size="10.5" fill="#636e72" font-family="inherit">faster reporting engine, module loading</text><text x="118" y="226.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 19</text><rect x="130" y="206" width="690.6" height="30" rx="8" fill="#FF7675" opacity="0.92"/><text x="830.6" y="220.0" font-size="14" font-weight="800" fill="#2d3436" font-family="inherit">325</text><text x="872.6" y="220.0" font-size="10.5" fill="#636e72" font-family="inherit">≈ +30% page-load vs v18 (partner benchmarks)</text><text x="118" y="270.0" font-size="14" font-weight="700" fill="#2d3436" text-anchor="end" font-family="inherit">Odoo 20</text><rect x="130" y="250" width="796.9" height="30" rx="8" fill="#714B67" opacity="0.92"/><text x="936.9" y="264.0" font-size="14" font-weight="800" fill="#2d3436" font-family="inherit">375</text><text x="978.9" y="264.0" font-size="10.5" fill="#636e72" font-family="inherit">OWL 3, smaller JS bundles (early vendor-reported)</text><text x="130" y="332" font-size="11" fill="#636e72" font-family="inherit">Relative web-client / server performance index (Odoo 15 = 100) — composite of official Odoo benchmarks and partner-reported tests; illustrative, not a single official metric.</text></svg>
+</section>
+
+<section id="radar">
+  <h2>5 · Scorecard: Odoo 17 – 20</h2>
+  <p class="sub">Analyst scores (0–10) across six dimensions. Note the classic trade-off: the newest version (20) wins on capability, while 17/18 win on ecosystem maturity and proven stability.</p>
+  <div class="split">
+    <div><svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Radar comparison of Odoo 17 to 20"><polygon points="250.0,197.0 278.6,213.5 278.6,246.5 250.0,263.0 221.4,246.5 221.4,213.5" fill="none" stroke="#b2bec3" stroke-width="1" opacity="0.35"/><polygon points="250.0,164.0 307.2,197.0 307.2,263.0 250.0,296.0 192.8,263.0 192.8,197.0" fill="none" stroke="#b2bec3" stroke-width="1" opacity="0.35"/><polygon points="250.0,131.0 335.7,180.5 335.7,279.5 250.0,329.0 164.3,279.5 164.3,180.5" fill="none" stroke="#b2bec3" stroke-width="1" opacity="0.35"/><polygon points="250.0,98.0 364.3,164.0 364.3,296.0 250.0,362.0 135.7,296.0 135.7,164.0" fill="none" stroke="#b2bec3" stroke-width="1" opacity="0.35"/><polygon points="250.0,65.0 392.9,147.5 392.9,312.5 250.0,395.0 107.1,312.5 107.1,147.5" fill="none" stroke="#b2bec3" stroke-width="1" opacity="1.0"/><line x1="250" y1="230" x2="250.0" y2="65.0" stroke="#dfe6e9"/><text x="250.0" y="38.6" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="middle" font-family="inherit">Speed</text><line x1="250" y1="230" x2="392.9" y2="147.5" stroke="#dfe6e9"/><text x="415.8" y="134.3" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="start" font-family="inherit">AI &</text><text x="415.8" y="147.3" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="start" font-family="inherit">Automation</text><line x1="250" y1="230" x2="392.9" y2="312.5" stroke="#dfe6e9"/><text x="415.8" y="325.7" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="start" font-family="inherit">UI / UX</text><line x1="250" y1="230" x2="250.0" y2="395.0" stroke="#dfe6e9"/><text x="250.0" y="421.4" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="middle" font-family="inherit">Mobile &</text><text x="250.0" y="434.4" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="middle" font-family="inherit">Offline</text><line x1="250" y1="230" x2="107.1" y2="312.5" stroke="#dfe6e9"/><text x="84.2" y="325.7" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="end" font-family="inherit">Ecosystem</text><text x="84.2" y="338.7" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="end" font-family="inherit">maturity</text><line x1="250" y1="230" x2="107.1" y2="147.5" stroke="#dfe6e9"/><text x="84.2" y="134.3" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="end" font-family="inherit">Proven</text><text x="84.2" y="147.3" font-size="11.5" font-weight="600" fill="#2d3436" text-anchor="end" font-family="inherit">stability</text><polygon points="250.0,106.2 278.6,213.5 371.5,300.1 250.0,329.0 114.3,308.4 121.4,155.8" fill="#00CEC9" fill-opacity="0.16" stroke="#00CEC9" stroke-width="2.5"/><circle cx="250.0" cy="106.2" r="3.5" fill="#00CEC9"/><circle cx="278.6" cy="213.5" r="3.5" fill="#00CEC9"/><circle cx="371.5" cy="300.1" r="3.5" fill="#00CEC9"/><circle cx="250.0" cy="329.0" r="3.5" fill="#00CEC9"/><circle cx="114.3" cy="308.4" r="3.5" fill="#00CEC9"/><circle cx="121.4" cy="155.8" r="3.5" fill="#00CEC9"/><polygon points="250.0,94.7 321.4,188.8 374.3,301.8 250.0,362.0 118.5,305.9 117.1,153.3" fill="#FDCB6E" fill-opacity="0.16" stroke="#FDCB6E" stroke-width="2.5"/><circle cx="250.0" cy="94.7" r="3.5" fill="#FDCB6E"/><circle cx="321.4" cy="188.8" r="3.5" fill="#FDCB6E"/><circle cx="374.3" cy="301.8" r="3.5" fill="#FDCB6E"/><circle cx="250.0" cy="362.0" r="3.5" fill="#FDCB6E"/><circle cx="118.5" cy="305.9" r="3.5" fill="#FDCB6E"/><circle cx="117.1" cy="153.3" r="3.5" fill="#FDCB6E"/><polygon points="250.0,81.5 357.2,168.1 381.5,305.9 250.0,362.0 128.5,300.1 128.5,159.9" fill="#FF7675" fill-opacity="0.16" stroke="#FF7675" stroke-width="2.5"/><circle cx="250.0" cy="81.5" r="3.5" fill="#FF7675"/><circle cx="357.2" cy="168.1" r="3.5" fill="#FF7675"/><circle cx="381.5" cy="305.9" r="3.5" fill="#FF7675"/><circle cx="250.0" cy="362.0" r="3.5" fill="#FF7675"/><circle cx="128.5" cy="300.1" r="3.5" fill="#FF7675"/><circle cx="128.5" cy="159.9" r="3.5" fill="#FF7675"/><polygon points="250.0,73.2 385.7,151.6 384.3,307.5 250.0,386.8 164.3,279.5 157.1,176.4" fill="#714B67" fill-opacity="0.16" stroke="#714B67" stroke-width="2.5"/><circle cx="250.0" cy="73.2" r="3.5" fill="#714B67"/><circle cx="385.7" cy="151.6" r="3.5" fill="#714B67"/><circle cx="384.3" cy="307.5" r="3.5" fill="#714B67"/><circle cx="250.0" cy="386.8" r="3.5" fill="#714B67"/><circle cx="164.3" cy="279.5" r="3.5" fill="#714B67"/><circle cx="157.1" cy="176.4" r="3.5" fill="#714B67"/><rect x="400" y="49" width="14" height="14" rx="4" fill="#00CEC9"/><text x="422" y="61" font-size="13" font-weight="700" fill="#2d3436" font-family="inherit">Odoo 17</text><rect x="400" y="79" width="14" height="14" rx="4" fill="#FDCB6E"/><text x="422" y="91" font-size="13" font-weight="700" fill="#2d3436" font-family="inherit">Odoo 18</text><rect x="400" y="109" width="14" height="14" rx="4" fill="#FF7675"/><text x="422" y="121" font-size="13" font-weight="700" fill="#2d3436" font-family="inherit">Odoo 19</text><rect x="400" y="139" width="14" height="14" rx="4" fill="#714B67"/><text x="422" y="151" font-size="13" font-weight="700" fill="#2d3436" font-family="inherit">Odoo 20</text><text x="400" y="184" font-size="10.5" fill="#636e72" font-family="inherit">Analyst scores 0–10</text></svg></div>
+    <div>
+      <table class="matrix">
+        <thead><tr><th class="rowlabel">Dimension</th><th>Best version</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">Raw speed</td><td class="ok">Odoo 20 → 19</td></tr>
+          <tr><td class="rowlabel">AI &amp; automation</td><td class="ok">Odoo 20 (agentic AI + MCP)</td></tr>
+          <tr><td class="rowlabel">UI / UX polish</td><td class="ok">Odoo 20 → 19</td></tr>
+          <tr><td class="rowlabel">Mobile &amp; offline</td><td class="ok">Odoo 20 (true offline mode)</td></tr>
+          <tr><td class="rowlabel">Module ecosystem maturity</td><td class="ok">Odoo 17 / 18 (widest ported library)</td></tr>
+          <tr><td class="rowlabel">Proven stability in production</td><td class="ok">Odoo 18 → 19</td></tr>
+          <tr><td class="rowlabel">Longest remaining support</td><td class="ok">Odoo 20 (~Sep 2029)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="choose">
+  <h2>6 · Which Version Is Better — For Which Purpose?</h2>
+  <p class="sub">A practical decision guide. Community edition is free (LGPL) on every version; Enterprise adds Studio, the mobile app, Barcode, IoT, advanced accounting and official support, priced per user.</p>
+  <div class="rgrid">
+        <div class="rcard">
+          <div class="rpick" style="background:#714B67">Odoo 20</div>
+          <div class="rtitle">New implementation starting now</div>
+          <div class="rwhy">Longest support runway (~Sep 2029), agentic AI, offline mode, headless REST/GraphQL. First verify the modules you need have a 20.0 build — if not, start on 19.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#FF7675">Odoo 19</div>
+          <div class="rtitle">Stability & proven ecosystem first</div>
+          <div class="rwhy">Supported until Sep 2028, mature module/partner ecosystem, native AI already in place, ~30% faster than v18. The safest modern target for most upgrades today.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#FF7675">Odoo 19 / 20 Community</div>
+          <div class="rtitle">Tight budget — Community (free) edition</div>
+          <div class="rwhy">Community is free (LGPL) on any version — but never deploy 15–17: they no longer receive security fixes. Use the newest Community you can staff.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#714B67">Odoo 20</div>
+          <div class="rtitle">Manufacturing & warehouses</div>
+          <div class="rwhy">Continuous production, weekly Kanban MRP, CMR documents, smarter reordering. Fall back to 18/19 if your shop-floor custom modules aren't ported yet.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#714B67">Odoo 20 (or 19)</div>
+          <div class="rtitle">Retail, POS & field teams</div>
+          <div class="rwhy">v20 adds true offline work with sync and multi-day offline POS. v19 already has the revamped POS with dark mode and order presets.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#FF7675">Odoo 19 / 20</div>
+          <div class="rtitle">eCommerce & websites</div>
+          <div class="rwhy">v19: SEO assistant, faster shop, marketplace connectors. v20: AI builds pages, forms and product content from a prompt.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#e17055">Upgrade NOW → 19 or 20</div>
+          <div class="rtitle">You are on Odoo 17 right now</div>
+          <div class="rwhy">Standard support ends September 2026 — this month. Every month of delay means running without security fixes. Jump straight to 19 (safe) or 20 (latest).</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#d63031">Upgrade urgently → 19 / 20</div>
+          <div class="rtitle">You are on Odoo 15 or 16</div>
+          <div class="rwhy">Both are end-of-life. Skip intermediate hops — migrating 15→20 directly costs less than chaining upgrades. Budget for custom-module compatibility work.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#FDCB6E">Odoo 18 or 19</div>
+          <div class="rtitle">Heavy custom modules / integrations</div>
+          <div class="rwhy">Largest library of ported community (OCA) and partner modules today. Move to 20 once your key modules publish 20.0 branches.</div>
+        </div>
+        <div class="rcard">
+          <div class="rpick" style="background:#714B67">Odoo 20 Enterprise</div>
+          <div class="rtitle">AI-first automation roadmap</div>
+          <div class="rwhy">Agentic AI that writes records, MCP connectivity to external AI tools. Note: AI features consume IAP credits on top of user licences.</div>
+        </div></div>
+</section>
+
+<section id="upgrade">
+  <h2>7 · Upgrade Path</h2>
+  <p class="sub">Wherever you are today, here is the recommended move.</p>
+  <svg viewBox="0 0 1060 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Odoo upgrade path"><rect x="40.0" y="30" width="130" height="64" rx="14" fill="#fff" stroke="#b2bec3" stroke-width="2.5"/><text x="105.0" y="60" font-size="22" font-weight="800" fill="#2d3436" text-anchor="middle" font-family="inherit">Odoo 15</text><text x="105.0" y="80" font-size="11" font-weight="600" fill="#636e72" text-anchor="middle" font-family="inherit">EOL</text><line x1="176.0" y1="62" x2="204.0" y2="62" stroke="#636e72" stroke-width="2"/><polygon points="204.0,56 214.0,62 204.0,68" fill="#636e72"/><rect x="210.0" y="30" width="130" height="64" rx="14" fill="#fff" stroke="#b2bec3" stroke-width="2.5"/><text x="275.0" y="60" font-size="22" font-weight="800" fill="#2d3436" text-anchor="middle" font-family="inherit">Odoo 16</text><text x="275.0" y="80" font-size="11" font-weight="600" fill="#636e72" text-anchor="middle" font-family="inherit">EOL</text><line x1="346.0" y1="62" x2="374.0" y2="62" stroke="#636e72" stroke-width="2"/><polygon points="374.0,56 384.0,62 374.0,68" fill="#636e72"/><rect x="380.0" y="30" width="130" height="64" rx="14" fill="#fff" stroke="#fdcb6e" stroke-width="2.5"/><text x="445.0" y="60" font-size="22" font-weight="800" fill="#2d3436" text-anchor="middle" font-family="inherit">Odoo 17</text><text x="445.0" y="80" font-size="11" font-weight="600" fill="#636e72" text-anchor="middle" font-family="inherit">ends now</text><line x1="516.0" y1="62" x2="544.0" y2="62" stroke="#636e72" stroke-width="2"/><polygon points="544.0,56 554.0,62 544.0,68" fill="#636e72"/><rect x="550.0" y="30" width="130" height="64" rx="14" fill="#fff" stroke="#55efc4" stroke-width="2.5"/><text x="615.0" y="60" font-size="22" font-weight="800" fill="#2d3436" text-anchor="middle" font-family="inherit">Odoo 18</text><text x="615.0" y="80" font-size="11" font-weight="600" fill="#636e72" text-anchor="middle" font-family="inherit">to 2027</text><line x1="686.0" y1="62" x2="714.0" y2="62" stroke="#636e72" stroke-width="2"/><polygon points="714.0,56 724.0,62 714.0,68" fill="#636e72"/><rect x="720.0" y="30" width="130" height="64" rx="14" fill="#fff" stroke="#00b894" stroke-width="2.5"/><text x="785.0" y="60" font-size="22" font-weight="800" fill="#2d3436" text-anchor="middle" font-family="inherit">Odoo 19</text><text x="785.0" y="80" font-size="11" font-weight="600" fill="#636e72" text-anchor="middle" font-family="inherit">to 2028</text><line x1="856.0" y1="62" x2="884.0" y2="62" stroke="#636e72" stroke-width="2"/><polygon points="884.0,56 894.0,62 884.0,68" fill="#636e72"/><rect x="890.0" y="30" width="130" height="64" rx="14" fill="#fff" stroke="#714B67" stroke-width="2.5"/><text x="955.0" y="60" font-size="22" font-weight="800" fill="#2d3436" text-anchor="middle" font-family="inherit">Odoo 20</text><text x="955.0" y="80" font-size="11" font-weight="600" fill="#636e72" text-anchor="middle" font-family="inherit">to ~2029</text><text x="530.0" y="130" font-size="12.5" fill="#636e72" text-anchor="middle" font-family="inherit">Odoo supports multi-version upgrades — from v15/16/17 you can jump straight to 19 or 20 (skipping hops saves migration cost).</text><text x="530.0" y="152" font-size="12.5" fill="#636e72" text-anchor="middle" font-family="inherit">Rule of thumb: stay within the 3 most recent major versions to keep security fixes, module availability and vendor support.</text></svg>
+</section>
+
+<div class="verdict">
+  <h2>✨ The Bottom Line</h2>
+  <ul>
+    <li><b>Never start a new project on Odoo 15, 16 or 17</b> — they are at or past end of support and no longer receive security fixes.</li>
+    <li><b>Starting fresh today → Odoo 20</b> (released 24 Sep 2026): longest support runway, agentic AI, offline mode, native REST/GraphQL. Confirm your must-have modules exist on 20.0; otherwise <b>Odoo 19</b> is the equally valid, more proven choice (supported to Sep 2028).</li>
+    <li><b>On Odoo 17 → upgrade NOW</b> (support ends this month, Sep 2026). Target 19 for safety or 20 for features — you can skip versions.</li>
+    <li><b>On Odoo 18 → plan the upgrade within 12 months</b> (support to Sep 2027).</li>
+    <li><b>On Odoo 15/16 → urgent migration</b>, jumping straight to 19 or 20; budget for custom-module porting — the older your base, the more compatibility work.</li>
+    <li><b>Rule of thumb:</b> stay within the three most recent majors (today: 18, 19, 20) so you keep security patches, module availability and vendor support. Odoo 20 is the future; Odoo 19 is the safe present.</li>
+  </ul>
+</div>
+
+</div>
+
+<footer>
+  <p><b>Sources:</b> odoo.com — Meet Odoo 16 blog &amp; release notes; Odoo 17/18/19 release notes &amp; documentation (source-install requirements); Odoo Experience 2026 keynote &amp; Odoo 20 release notes coverage (odoo.com/blog, macopedia, Nexuro Digital, maifelz); supported-version lifecycle (odiware “Odoo Supported Versions 2026”, banibro “Latest Odoo version 2026”, odooupgradedone EOL calendar); v18–v19 performance comparisons (Ksolves, Emizentech, Alligator Infosoft); Odoo 20 installation requirements (iventureteam). Benchmark figures are as published by Odoo and partners; the composite index chart is illustrative.</p>
+  <p style="margin-top:6px">Generated 8 October 2026 · Self-contained HTML (inline SVG charts, no external assets).</p>
+</footer>
+
+</body>
+</html>
